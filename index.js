@@ -1,6 +1,52 @@
 var inquirer = require('inquirer');
 const mysql = require('mysql2');
 const cTable = require('console.table');
+const connection = require('./connections');
+
+//start with .sql file then ask bcs how to connect questions with cTable annd screenshot from TAs
+
+
+/* 
+What would you like to do?
+
+>Add departments
+ Add roles
+ Add employees
+ View departments
+ View roles
+View employees
+Update employee roles
+
+id Department 
+1 Finance
+2 Legal 
+3 Marketing
+4 Engineering
+5 Art
+6 Test
+
+View roles
+id  Roles          salary    dapartment_id
+1   Accountant     75000     1
+2   Lawyer         300000    2
+3   Marketing team 150000    3
+4   Software Dev   125000    4
+5   Designer       60000     3
+6   Sales          60000     3
+
+View Employees 
+id Employee   Manager     Role         Dept
+1  Victor     null        Accountant    Finance
+2  Amber      Ramon       Accountant    Finance 
+3  Lito       Ram         Software Dev  Engineering 
+4  Bogata     Ram         Designer      Art
+5  Erik       Ram         Sales         test
+6  Carl       Ram         Software Dev  Engineering
+
+
+
+*/
+
 
 
 
