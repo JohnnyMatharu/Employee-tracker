@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const cTable = require('console.table');
 const connection = require('./connections');
 
-//start with .sql file then ask bcs how to connect questions with cTable annd screenshot from TAs
+//Read acceptance criteria and match options, then make sql, the call it at .then spot
 
 const questions = () => {
 
@@ -95,6 +95,10 @@ WHEN I start the application
 THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
 WHEN I choose to view all departments
 THEN I am presented with a formatted table showing department names and department ids
+
+HERE
+
+
 WHEN I choose to view all roles
 THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
 WHEN I choose to view all employees
