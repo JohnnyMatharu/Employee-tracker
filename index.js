@@ -3,95 +3,47 @@ const mysql = require('mysql2');
 const cTable = require('console.table');
 const connection = require('./connections');
 
-
-
 //start with .sql file then ask bcs how to connect questions with cTable annd screenshot from TAs
-
-
-/* 
 
 const questions = () => {
 
   inquirer.prompt(
   [{
-      // this needs to be fixed to change title of readme.md -check
-      type: "input",
-      name: "title",
-      message: "What is your project title?"
-    },    
-     { type: "input",
-      name: "description",
-      message: "Please enter a description of your application"
-      },
-      { 
-        type: "input",
-        name: "installation",
-        message: "Please enter the installation instructions"
-      },
-      { 
-        type: "input",
-        name: "usage",
-        message: "Please enter the usage information"
-      },
-      { 
-        type: "input",
-        name: "contribution",
-        message: "Please enter the contribution guidelines"
-      },
-      { 
-        type: "input",
-        name: "test",
-        message: "Please enter the test instructions" 
-      },
-      { 
-        //you can check this in 9.3, this section will be in conjuction of license portion of other page, selection is working but value is not being produced
-        type: "list",
-        name: "license",
-        message: "Please choose a license for your application from a list of following options (Press <enter> to select)",
-        choices: ["Apache License 2.0", "GNU General Public License v3.0", "MIT License", "BSD 2-Clause Simplified License", "BSD 3-Clause New or Revised License", "Boost Software License 1.0",
-        "Creative Commons Zero v1.0 Universal", "Eclipse Public License 2.0", "GNU Affero General Public License v3.0", "GNU General Public License v2.0", "GNU Lesser General Public License v2.1", "Mozilla Public License 2.0", "The Unlicense"]              
-    
-      },
-      {
-      type: "input",
-      name: "Github",
-      message: "What is your GitHub username for this application?" 
-    },
-{
-type: "input",
-name: "email",
-message: "What is your email address?"
-},
-{   
-type: "input",
-name: "questions",
-message: "Do you have any questions, you can also reach me with additional questions via email?"
-}]).then(data =>  {
-    console.log(data)
+     type: "list",
+     name: "choice",
+     message: "What would you like to do(Press <enter> to select)",
+     choices: ["Add departments", "Add roles", "Add employees", "View departments", "View roles", "View employees", "Update employee roles"]             
+     }
+                
+]).then(data =>  {
+ // Here you will perform database query operation 
+ // let newManager = new Manager(data.name, data.id, data.email, data.number);
+ // console.log(newManager);
+ // team1.push(newManager);
+//console.log(team1);
+console.log
+(data.choice);
+    let displayDB = data.choice;
+console.log(displayDB);
+    function options (displayDB){      
+      if (displayDB === "View departments") 
+        {
+     //     inquirer.prompt(
+       //     [{
+console.log(
+"id Department, 1 Finance, 2 Legal, 3 Marketing, 4 Engineering, 5 Art, 6 Test");
+        }
+        else {
+console.log("that is a good choice")
+        }
+    }
+    options(displayDB);    
+})
 
+};
 
-
-
-
-
-What would you like to do?
-
->Add departments
- Add roles
- Add employees
- View departments
- View roles
-View employees
-Update employee roles
-
-id Department 
-1 Finance
-2 Legal 
-3 Marketing
-4 Engineering
-5 Art
-6 Test
-
+questions();
+    /*
 View roles
 id  Roles          salary    dapartment_id
 1   Accountant     75000     1
@@ -173,7 +125,7 @@ my sql wed
 connections thurs
 FRi, Sat and Sun remaining and submission
 
-Installed: mysql2, inquirer, console.table, 
+Installed: mysql2, inquirer, console.table, npm i, npm start
 
 You will be committing a file that contains your database credentials. Make sure your MySQL password is not used for any other personal accounts, because it will be visible on GitHub.
 
