@@ -3,10 +3,77 @@ const mysql = require('mysql2');
 const cTable = require('console.table');
 const connection = require('./connections');
 
+
+
 //start with .sql file then ask bcs how to connect questions with cTable annd screenshot from TAs
 
 
 /* 
+
+const questions = () => {
+
+  inquirer.prompt(
+  [{
+      // this needs to be fixed to change title of readme.md -check
+      type: "input",
+      name: "title",
+      message: "What is your project title?"
+    },    
+     { type: "input",
+      name: "description",
+      message: "Please enter a description of your application"
+      },
+      { 
+        type: "input",
+        name: "installation",
+        message: "Please enter the installation instructions"
+      },
+      { 
+        type: "input",
+        name: "usage",
+        message: "Please enter the usage information"
+      },
+      { 
+        type: "input",
+        name: "contribution",
+        message: "Please enter the contribution guidelines"
+      },
+      { 
+        type: "input",
+        name: "test",
+        message: "Please enter the test instructions" 
+      },
+      { 
+        //you can check this in 9.3, this section will be in conjuction of license portion of other page, selection is working but value is not being produced
+        type: "list",
+        name: "license",
+        message: "Please choose a license for your application from a list of following options (Press <enter> to select)",
+        choices: ["Apache License 2.0", "GNU General Public License v3.0", "MIT License", "BSD 2-Clause Simplified License", "BSD 3-Clause New or Revised License", "Boost Software License 1.0",
+        "Creative Commons Zero v1.0 Universal", "Eclipse Public License 2.0", "GNU Affero General Public License v3.0", "GNU General Public License v2.0", "GNU Lesser General Public License v2.1", "Mozilla Public License 2.0", "The Unlicense"]              
+    
+      },
+      {
+      type: "input",
+      name: "Github",
+      message: "What is your GitHub username for this application?" 
+    },
+{
+type: "input",
+name: "email",
+message: "What is your email address?"
+},
+{   
+type: "input",
+name: "questions",
+message: "Do you have any questions, you can also reach me with additional questions via email?"
+}]).then(data =>  {
+    console.log(data)
+
+
+
+
+
+
 What would you like to do?
 
 >Add departments
