@@ -44,6 +44,8 @@ console.log("that is a good choice")
 
 questions();
     /*
+CH:12.2.1, revise start from here, then inclass video and then inclass activities
+
 View roles
 id  Roles          salary    dapartment_id
 1   Accountant     75000     1
@@ -70,6 +72,8 @@ id Employee   Manager     Role         Dept
 
 
 /*
+Andrew AskBCS, you will need .env file to save pasword for anyone who opens your sql, and connections.js will have connection to database
+
 ERIK (TA):
 sql
 node.js
