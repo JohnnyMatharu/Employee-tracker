@@ -5,13 +5,11 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'slow&steady',
+  password: 'great',
   database: 'Employees'
 });
 connection.connect();
 module.exports = connection;
-
-
 
 
 // execute will internally call prepare and query
