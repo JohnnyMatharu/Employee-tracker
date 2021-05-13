@@ -16,11 +16,9 @@ const questions = () => {
      }
                 
 ]).then(data =>  {
- // Here you will perform database query operation 
- // let newManager = new Manager(data.name, data.id, data.email, data.number);
- // console.log(newManager);
- // team1.push(newManager);
-//console.log(team1);
+ // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
+ // documentation for more information 
+ //results in the console.table 
 console.log
 (data.choice);
     let displayDB = data.choice;

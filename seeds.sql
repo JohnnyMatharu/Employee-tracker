@@ -5,8 +5,11 @@ USE Employees;
 CREATE TABLE Department (
 id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(30) NOT NULL,
+
 );
 
+-- following is to check and can be removed
+INSERT INTO Department (name) VALUES ('Finance');
 
 
 -- To enter values: INSERT INTO candidates (first_name, last_name, industry_connected)
