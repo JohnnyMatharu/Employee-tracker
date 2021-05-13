@@ -5,14 +5,20 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
+  password: 'slow&steady',
   database: 'Employees'
 });
- 
+connection.connect();
+module.exports = connection;
+
+
+
+
 // execute will internally call prepare and query
 connection.execute(
     //all queries, one connection per query
     //check and fix queries, askBCS results console.log and MySQl Bench and connect it to .then
-  'SELECT * FROM Employees; 
+    'DESCRIBE Employees;' 
   function(err, results, fields) {
     console.log(results); // results contains rows returned by server, data 
     console.log(fields); // fields contains extra meta data about results, if available
