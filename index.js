@@ -16,11 +16,26 @@ const questions = () => {
      }
                 
 ]).then(data =>  {
+
+    connection.connect();
+
+    connection.query(
+        //all queries, one connection per query
+        //check and fix queries, askBCS results console.log and MySQl Bench and connect it to .then
+       'DESCRIBE Employees;',
+      function(err, results, fields) {
+        console.log(results); // results contains rows returned by server, data 
+        console.log(fields); // fields contains extra meta data about results, if available
+     
+        // If you execute same statement again, it will be picked from a LRU cache
+        // which will save query preparation time and give better performance
+      });
+    
+
  // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
  // documentation for more information 
  //results in the console.table 
-console.log
-(data.choice);
+
     let displayDB = data.choice;
 console.log(displayDB);
     function options (displayDB){      

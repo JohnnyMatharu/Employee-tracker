@@ -6,25 +6,14 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'great',
+  //this password will be empty when submitted
   database: 'Employees'
 });
-connection.connect();
 module.exports = connection;
 
 
 // execute will internally call prepare and query
-connection.execute(
-    //all queries, one connection per query
-    //check and fix queries, askBCS results console.log and MySQl Bench and connect it to .then
-    'DESCRIBE Employees;' 
-  function(err, results, fields) {
-    console.log(results); // results contains rows returned by server, data 
-    console.log(fields); // fields contains extra meta data about results, if available
- 
-    // If you execute same statement again, it will be picked from a LRU cache
-    // which will save query preparation time and give better performance
-  }
-);
+
 
 //connection.execute{
  //pick employees, update anything, USER INPUT TO VARIABLE, ONE query for each parameter to update   
