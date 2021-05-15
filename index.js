@@ -19,24 +19,39 @@ const questions = () => {
 
     connection.connect();
 
-    connection.query(
+//    connection.query(
         //all queries, one connection per query
         //check and fix queries, askBCS results console.log and MySQl Bench and connect it to .then
-       'DESCRIBE Employees;',
-      function(err, results, fields) {
-        console.log(results); // results contains rows returned by server, data 
-        console.log(fields); // fields contains extra meta data about results, if available
+  //     'DESCRIBE Employees;',
+    //  function(err, results, fields) {
+      //  console.log(results); // results contains rows returned by server, data 
+       // console.log(fields); // fields contains extra meta data about results, if available
      
         // If you execute same statement again, it will be picked from a LRU cache
         // which will save query preparation time and give better performance
-      });
-    
-
+     // });
+ 
+      class DB {
+        // Keeping a reference to the connection on the class in case we need it later
+        constructor(connection) {
+          this.connection = connection;
+        }
+      
+        // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
+        findAllEmployees() {
+          return this.connection.query(
+            "DESCRIBE Employees"
+          );
+        };
+        
+      };
+      console.log(connection.findAllEmployees);
  // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
  // documentation for more information 
  //results in the console.table 
+      
 
-    let displayDB = data.choice;
+ let displayDB = data.choice;
 console.log(displayDB);
     function options (displayDB){      
       if (displayDB === "View departments") 

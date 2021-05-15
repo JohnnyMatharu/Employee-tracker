@@ -9,6 +9,8 @@ const connection = mysql.createConnection({
   //this password will be empty when submitted
   database: 'Employees'
 });
+
+
 module.exports = connection;
 
 
