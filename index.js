@@ -40,14 +40,14 @@ const questions = () => {
         // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
       findAllEmployees() {
           return this.connection.query(
-           "SELECT department_name FROM Department;"
+          //  "USE Employees",
+           "SELECT * FROM Department;"
           );
         };
         
       };
       
       let database = new DB(connection)
-     console.log(database.findAllEmployees, "test3");
 
 let result = database.findAllEmployees();
       console.log(result);

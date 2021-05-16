@@ -7,27 +7,16 @@ USE Employees;
 CREATE TABLE Department (
  id INTEGER AUTO_INCREMENT PRIMARY KEY,
   department_name VARCHAR(30) NOT NULL
-
 );
 
 -- following is to check and can be removed
 INSERT INTO Department (department_name) 
-VALUES ('Finance'),
-
-INSERT INTO Department (department_name) 
-VALUES ('Legal'),
-
-INSERT INTO Department (department_name) 
-VALUES ('Marketing'),
-
-INSERT INTO Department (department_name) 
-VALUES ('Engineering'),
-
-INSERT INTO Department (department_name) 
-VALUES ('Art'),
-
-INSERT INTO Department (department_name) 
-VALUES ('Test2'),
+VALUES 
+('Legal'),
+('Marketing'),
+('Engineering'),
+('Art'),
+('Test2');
 
 -- To enter values: INSERT INTO candidates (first_name, last_name, industry_connected)
 -- VALUES ('Ronald', 'Firbank', 1);
