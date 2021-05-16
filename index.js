@@ -38,14 +38,19 @@ const questions = () => {
         }
       
         // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
-        findAllEmployees() {
+      findAllEmployees() {
           return this.connection.query(
-            "SELECT department_name"
+           "SELECT department_name FROM Department;"
           );
         };
         
       };
-      console.log(connection.findAllEmployees);
+      
+      let database = new DB(connection)
+     console.log(database.findAllEmployees, "test3");
+
+let result = database.findAllEmployees();
+      console.log(result);
  // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
  // documentation for more information 
  //results in the console.table 
