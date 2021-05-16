@@ -1,6 +1,6 @@
 // get the client
 const mysql = require('mysql2');
- 
+const util = require("util"); 
 // create the connection to database
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -9,7 +9,9 @@ const connection = mysql.createConnection({
   //this password will be empty when submitted
   database: 'Employees'
 });
+connection.connect();
 
+connection.query = util.promisify(connection.query);
 
 module.exports = connection;
 

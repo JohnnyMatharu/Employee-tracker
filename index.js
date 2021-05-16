@@ -17,54 +17,40 @@ const questions = () => {
                 
 ]).then(data =>  {
 
-    connection.connect();
-
-//    connection.query(
-        //all queries, one connection per query
-        //check and fix queries, askBCS results console.log and MySQl Bench and connect it to .then
-  //     'DESCRIBE Employees;',
-    //  function(err, results, fields) {
-      //  console.log(results); // results contains rows returned by server, data 
-       // console.log(fields); // fields contains extra meta data about results, if available
-     
-        // If you execute same statement again, it will be picked from a LRU cache
-        // which will save query preparation time and give better performance
-     // });
  
-      class DB {
-        // Keeping a reference to the connection on the class in case we need it later
-        constructor(connection) {
-          this.connection = connection;
-        }
-      
-        // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
-      findAllEmployees() {
-          return this.connection.query(
-          //  "USE Employees",
-           "SELECT * FROM Department;"
-          );
-        };
-        
-      };
-      
-      let database = new DB(connection)
-
-let result = database.findAllEmployees();
-      console.log(result);
- // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
- // documentation for more information 
- //results in the console.table 
-      
-
+    
  let displayDB = data.choice;
 console.log(displayDB);
     function options (displayDB){      
       if (displayDB === "View departments") 
         {
-     //     inquirer.prompt(
-       //     [{
-console.log(
-"id Department, 1 Finance, 2 Legal, 3 Marketing, 4 Engineering, 5 Art, 6 Test");
+  
+          class DB {
+            // Keeping a reference to the connection on the class in case we need it later
+            constructor(connection) {
+              this.connection = connection;
+            }
+          
+            // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
+          findAllDepartments() {
+              return this.connection.query(
+              //  "USE Employees",
+               "SELECT * FROM Department;"
+              );
+            };
+            
+          };
+          
+          let database = new DB(connection)
+    
+    database.findAllDepartments().then(data => {
+          console.log(data);
+     // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
+     // documentation for more information 
+     //results in the console.table 
+    
+    
+    });
         }
         else {
 console.log("that is a good choice")
@@ -76,7 +62,77 @@ console.log("that is a good choice")
 };
 
 questions();
-    /*
+/*
+To update model this 
+
+add something
+
+// Create a candidate
+router.post('/candidate', ({ body }, res) => {
+  const errors = inputCheck(
+    body,
+    'first_name',
+    'last_name',
+    'industry_connected'
+  );
+  if (errors) {
+    res.status(400).json({ error: errors });
+    return;
+  }
+
+  const sql = `INSERT INTO candidates (first_name, last_name, industry_connected, party_id) VALUES (?,?,?,?)`;
+  const params = [
+    body.first_name,
+    body.last_name,
+    body.industry_connected,
+    body.party_id
+  ];
+
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: body
+    });
+  });
+});
+
+
+// Update something
+router.put('/voter/:id', (req, res) => {
+  const errors = inputCheck(req.body, 'email');
+  if (errors) {
+    res.status(400).json({ error: errors });
+    return;
+  }
+
+  const sql = `UPDATE voters SET email = ? WHERE id = ?`;
+  const params = [req.body.email, req.params.id];
+
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    } else if (!result.affectedRows) {
+      res.json({
+        message: 'Voter not found'
+      });
+    } else {
+      res.json({
+        message: 'success',
+        data: req.body,
+        changes: result.affectedRows
+      });
+    }
+  });
+});
+
+
+*/
+
+/*
 CH:12.2.1, revise start from here, then inclass video and then inclass activities
 
 View roles

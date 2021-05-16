@@ -12,11 +12,13 @@ CREATE TABLE Department (
 -- following is to check and can be removed
 INSERT INTO Department (department_name) 
 VALUES 
+('Administration'),
+('Accounting'),
+('Payroll'),
 ('Legal'),
-('Marketing'),
-('Engineering'),
-('Art'),
-('Test2');
+('Social Media'),
+('Digital Media'),
+('Web Developer'),
 
 -- To enter values: INSERT INTO candidates (first_name, last_name, industry_connected)
 -- VALUES ('Ronald', 'Firbank', 1);
