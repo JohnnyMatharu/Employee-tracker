@@ -40,7 +40,7 @@ const questions = () => {
         // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
         findAllEmployees() {
           return this.connection.query(
-            "DESCRIBE Employees"
+            "SELECT department_name"
           );
         };
         

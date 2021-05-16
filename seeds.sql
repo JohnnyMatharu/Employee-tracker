@@ -3,14 +3,20 @@ CREATE DATABASE Employees;
 USE Employees;
 
 CREATE TABLE Department (
-id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-name VARCHAR(30) NOT NULL,
+ id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  deparment_name VARCHAR(30) NOT NULL,
 
 );
 
 -- following is to check and can be removed
-INSERT INTO Department (name) VALUES ('Finance');
-
+INSERT INTO Department 
+(deparment_name) VALUES 
+('Finance'),
+('Legal'),
+('Marketing'),
+('Engineering'),
+('Art'),
+('Test2'),
 
 -- To enter values: INSERT INTO candidates (first_name, last_name, industry_connected)
 -- VALUES ('Ronald', 'Firbank', 1);
