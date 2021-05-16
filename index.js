@@ -12,12 +12,10 @@ const questions = () => {
      type: "list",
      name: "choice",
      message: "What would you like to do(Press <enter> to select)",
-     choices: ["Add departments", "Add roles", "Add employees", "View departments", "View roles", "View employees", "Update employee roles"]             
+     choices: ["View departments", "View roles", "View employees", "Add departments", "Add roles", "Add employees", "Update employee roles"]             
      }
                 
 ]).then(data =>  {
-
- 
     
  let displayDB = data.choice;
 console.log(displayDB);
@@ -38,24 +36,69 @@ console.log(displayDB);
                "SELECT * FROM Department;"
               );
             };
-            
+            findAllRoles() {
+              return this.connection.query(
+              //  "USE Employees",
+               "SELECT * FROM Roles;"
+              );
+            }; 
+            findAllEmployees() {
+              return this.connection.query(
+              //  "USE Employees",
+               "SELECT * FROM Employee;"
+              );
+            };
           };
           
-          let database = new DB(connection)
+          let departmentData = new DB(connection)
     
-    database.findAllDepartments().then(data => {
+          departmentData.findAllDepartments().then(data => {
           console.log(data);
      // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
      // documentation for more information 
      //results in the console.table 
-    
-    
     });
         }
-        else {
-console.log("that is a good choice")
-        }
-    }
+        else if (displayDB === "View roles") {
+          let rolesData = new DB(connection)
+          rolesData.findAllRoles().then(data => {
+          console.log(data);
+        });
+      }  
+      
+    else if (displayDB === "View employees") {
+      let employeeData = new DB(connection)
+      employeeData.findAllEmployees().then(data => {
+      console.log(data);
+
+    });
+  }
+
+  else if (displayDB === "Add departments") {
+
+    console.log("Add departments");
+
+  
+}
+else if (displayDB === "Add roles") {
+
+  console.log("Add roles");
+
+
+}
+else if (displayDB === "Add employees") {
+
+  console.log("Add employees");
+
+
+}
+else {
+
+  console.log("Update employee roles");
+}            
+
+  
+      }
     options(displayDB);    
 })
 
@@ -63,71 +106,28 @@ console.log("that is a good choice")
 
 questions();
 /*
-To update model this 
+To Add model this 
+let addedRow = 3;
 
-add something
-
-// Create a candidate
-router.post('/candidate', ({ body }, res) => {
-  const errors = inputCheck(
-    body,
-    'first_name',
-    'last_name',
-    'industry_connected'
-  );
-  if (errors) {
-    res.status(400).json({ error: errors });
-    return;
+db.query(`INSERT INTO Employees (department_name) VALUES (?)`, addedRow, (err, result) => {
+  if (err) {
+    console.log(err);
   }
-
-  const sql = `INSERT INTO candidates (first_name, last_name, industry_connected, party_id) VALUES (?,?,?,?)`;
-  const params = [
-    body.first_name,
-    body.last_name,
-    body.industry_connected,
-    body.party_id
-  ];
-
-  db.query(sql, params, (err, result) => {
-    if (err) {
-      res.status(400).json({ error: err.message });
-      return;
-    }
-    res.json({
-      message: 'success',
-      data: body
-    });
-  });
+  console.log(result);
 });
 
 
-// Update something
-router.put('/voter/:id', (req, res) => {
-  const errors = inputCheck(req.body, 'email');
-  if (errors) {
-    res.status(400).json({ error: errors });
-    return;
+
+let updatedDepartment = userInput;
+let updatedRow = 4;
+
+db.query(`UPDATE Employees SET Department = ? WHERE id = ?`, updatedDepartmentID, updatedRow, (err, result) => {
+  if (err) {
+    console.log(err);
   }
-
-  const sql = `UPDATE voters SET email = ? WHERE id = ?`;
-  const params = [req.body.email, req.params.id];
-
-  db.query(sql, params, (err, result) => {
-    if (err) {
-      res.status(400).json({ error: err.message });
-    } else if (!result.affectedRows) {
-      res.json({
-        message: 'Voter not found'
-      });
-    } else {
-      res.json({
-        message: 'success',
-        data: req.body,
-        changes: result.affectedRows
-      });
-    }
-  });
+  console.log(result);
 });
+
 
 
 */

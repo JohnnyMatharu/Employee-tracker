@@ -5,20 +5,61 @@ CREATE DATABASE Employees;
 USE Employees;
 
 CREATE TABLE Department (
- id INTEGER AUTO_INCREMENT PRIMARY KEY,
-  department_name VARCHAR(30) NOT NULL
+ department_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+ department_name VARCHAR(30) NOT NULL
 );
+
+CREATE TABLE Roles (
+  roles_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  job_title VARCHAR(30) NOT NULL,
+  department_name VARCHAR(30) NOT NULL,
+  salary INTEGER(30) NOT NULL
+);
+
+CREATE TABLE Employee(
+  employee_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(30) NOT NULL,
+  last_name VARCHAR(30) NOT NULL,
+  job_title VARCHAR(30) NOT NULL,
+  department_name VARCHAR(30) NOT NULL,
+  employees VARCHAR(30) NOT NULL,
+  salary INTEGER(30) NOT NULL,
+  manager VARCHAR(30) NOT NULL
+);
+
+
+USE Employees;
 
 -- following is to check and can be removed
 INSERT INTO Department (department_name) 
 VALUES 
-('Administration'),
 ('Accounting'),
 ('Payroll'),
 ('Legal'),
 ('Social Media'),
 ('Digital Media'),
-('Web Developer'),
+('Web Developer')
+
+-- following is to check and can be removed
+INSERT INTO Roles (job_title, department_name, salary)
+VALUES 
+('Full Stack Web Developer','Web Development','55,000'),
+('Illustrator','Digital Media','48,000'),
+('Social Media Consultant','Social Media','52,000'),
+('Accounting Manager','Accounting','65,000'),
+('Payroll Consultant','Payroll','55,000'),
+('Corporate Law Consultant','Legal','54,000')
+
+
+INSERT INTO Employee (first_name, last_name, job_title, department_name, salary, manager)
+VALUES 
+('Andrew','Ogilivie','Full Stack Web Developer','Web Development','55,000','Johnny'),
+('Ashlee','Forese','Corporate Law Consultant','Legal','54,000','Johnny'),
+('Gisselle','Cordeiro','Payroll Consultant','Payroll','55,000','Harmy'),
+('Lauren','Martin','Social Media Consultant','Social Media','52,000','Johnny'),
+('Natisha','Perseud','Illustrator','Digital Media','48,000','Johnny'),
+('Vasily','Rybov','Accounting Manager','Accounting','65000','Harmy')
+
 
 -- To enter values: INSERT INTO candidates (first_name, last_name, industry_connected)
 -- VALUES ('Ronald', 'Firbank', 1);
@@ -26,10 +67,6 @@ VALUES
 -- To access SQL fil: mysql> source db/db.sql
 -- To update: UPDATE candidates SET industry_connected = 1 WHERE id = 3;
 -- To delete: DELETE FROM candidates WHERE first_name = "Montague";
-
-
-
-
 
 
 
