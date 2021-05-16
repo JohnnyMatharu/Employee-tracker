@@ -22,8 +22,6 @@ CREATE TABLE Employee(
   last_name VARCHAR(30) NOT NULL,
   job_title VARCHAR(30) NOT NULL,
   department_name VARCHAR(30) NOT NULL,
-  employees VARCHAR(30) NOT NULL,
---   CREATED_BY varchar(40) DEFAULT '' not null,
   salary INTEGER(30) NOT NULL,
   manager VARCHAR(30) NOT NULL
 );
@@ -37,7 +35,6 @@ VALUES
 ('Accounting'),
 ('Payroll'),
 ('Legal'),
-('Social Media'),
 ('Digital Media'),
 ('Web Developer');
 

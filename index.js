@@ -51,7 +51,7 @@ console.log(displayDB);
           };
           
           let departmentData = new DB(connection)
-          
+          let rolesData = new DB(connection)
           let employeeData = new DB(connection)
     
           departmentData.findAllDepartments().then(data => {
@@ -60,7 +60,6 @@ console.log(displayDB);
      // documentation for more information 
      //results in the console.table 
     });
-    let rolesData = new DB(connection)
     rolesData.findAllRoles().then(data => {
       console.log(data);
     });
