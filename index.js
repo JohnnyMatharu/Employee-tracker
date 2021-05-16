@@ -51,6 +51,8 @@ console.log(displayDB);
           };
           
           let departmentData = new DB(connection)
+          
+          let employeeData = new DB(connection)
     
           departmentData.findAllDepartments().then(data => {
           console.log(data);
@@ -58,25 +60,31 @@ console.log(displayDB);
      // documentation for more information 
      //results in the console.table 
     });
-        }
-        else if (displayDB === "View roles") {
-          let rolesData = new DB(connection)
-          rolesData.findAllRoles().then(data => {
-          console.log(data);
-        });
-      }  
-      
-    else if (displayDB === "View employees") {
-      let employeeData = new DB(connection)
-      employeeData.findAllEmployees().then(data => {
+    let rolesData = new DB(connection)
+    rolesData.findAllRoles().then(data => {
+      console.log(data);
+    });
+    employeeData.findAllEmployees().then(data => {
       console.log(data);
 
     });
+    
+  }
+        else if (displayDB === "View roles") {
+       
+          console.log("View roles");
+      
+      }  
+      
+    else if (displayDB === "View employees") {
+    
+      console.log("View roles");
+
   }
 
   else if (displayDB === "Add departments") {
 
-    console.log("Add departments");
+    console.log("View roles");
 
   
 }
