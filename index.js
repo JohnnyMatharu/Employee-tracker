@@ -8,106 +8,139 @@ const connection = require('./connections');
 const questions = () => {
 
   inquirer.prompt(
-  [{
-     type: "list",
-     name: "choice",
-     message: "What would you like to do(Press <enter> to select)",
-     choices: ["View departments", "View roles", "View employees", "Add departments", "Add roles", "Add employees", "Update employee roles"]             
-     }
-                
-]).then(data =>  {
-    
- let displayDB = data.choice;
-console.log(displayDB);
-    function options (displayDB){      
-      if (displayDB === "View departments") 
-        {
-  
-          class DB {
-            // Keeping a reference to the connection on the class in case we need it later
-            constructor(connection) {
-              this.connection = connection;
-            }
-          
-            // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
-          findAllDepartments() {
-              return this.connection.query(
-              //  "USE Employees",
-               "SELECT * FROM Department;"
-              );
-            };
-            findAllRoles() {
-              return this.connection.query(
-              //  "USE Employees",
-               "SELECT * FROM Roles;"
-              );
-            }; 
-            findAllEmployees() {
-              return this.connection.query(
-              //  "USE Employees",
-               "SELECT * FROM Employee;"
-              );
-            };
-          };
-          
-          let departmentData = new DB(connection)
-          let rolesData = new DB(connection)
-          let employeeData = new DB(connection)
-    
-          departmentData.findAllDepartments().then(data => {
-          console.log(data);
-     // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
-     // documentation for more information 
-     //results in the console.table 
-    });
-    rolesData.findAllRoles().then(data => {
-      console.log(data);
-    });
-    employeeData.findAllEmployees().then(data => {
-      console.log(data);
-
-    });
-    
-  }
-        else if (displayDB === "View roles") {
-       
-          console.log("View roles");
-      
-      }  
-      
-    else if (displayDB === "View employees") {
-    
-      console.log("View roles");
-
-  }
-
-  else if (displayDB === "Add departments") {
-
-    console.log("View roles");
-
-  
-}
-else if (displayDB === "Add roles") {
-
-  console.log("Add roles");
-
-
-}
-else if (displayDB === "Add employees") {
-
-  console.log("Add employees");
-
-
-}
-else {
-
-  console.log("Update employee roles");
-}            
-
-  
+    [{
+        type: "list",
+        name: "choice",
+        message: "What would you like to do(Press <enter> to select)",
+        choices: ["View departments", "View roles", "View employees", "Add departments", "Add roles", "Add employees", "Update employee roles"]
       }
-    options(displayDB);    
-})
+
+    ]).then(data => {
+
+      let displayDB = data.choice;
+      console.log(displayDB);
+
+      function options(displayDB) {
+        class DB {
+          // Keeping a reference to the connection on the class in case we need it later
+          constructor(connection) {
+            this.connection = connection;
+          }
+
+          // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
+          findAllDepartments() {
+            return this.connection.query(
+              //  "USE Employees",
+              "SELECT * FROM Department;"
+            );
+          };
+          findAllRoles() {
+            return this.connection.query(
+              //  "USE Employees",
+              "SELECT * FROM Roles;"
+            );
+          };
+          findAllEmployees() {
+            return this.connection.query(
+              //  "USE Employees",
+              "SELECT * FROM Employee;"
+            );
+          }; 
+          addDepartment(inputData) {
+            return this.connection.query(
+              //  "USE Employees",
+            `INSERT INTO Employees (department_name) VALUES(?)`, inputData
+            );
+          };
+          addroles() {
+            return this.connection.query(
+              //  "USE Employees",
+              `UPDATE Employees SET Department = ? WHERE id = ?`
+            );
+            };
+
+
+
+
+
+
+
+        
+        };
+        let departmentData = new DB(connection)
+        let rolesData = new DB(connection)
+        let employeeData = new DB(connection)
+        let addDepartmentData = new DB(connection)
+
+        if (displayDB === "View departments")
+{
+
+        departmentData.findAllDepartments().then(data => {
+          console.log(data,"test1");
+          console.table(data);
+          // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
+          // documentation for more information 
+          //results in the console.table 
+        });
+
+      } else if (displayDB === "View roles") {
+        rolesData.findAllRoles().then(data => {
+          console.log(data);
+          console.table(data);
+        });
+        console.log("View roles");
+
+      } else if (displayDB === "View employees") {
+ 
+        employeeData.findAllEmployees().then(data => {
+          console.log(data);
+          console.table(data);
+        });
+        console.log("View employees");
+
+      } else if (displayDB === "Add departments") {
+
+//list and input
+
+//start new inquirer prompt, ask quetion, take data, call class function for query, pass the data, query, pass data you have
+
+        inquirer.prompt(
+          [{
+              type: "input",
+              name: "inputDepartment",
+              message: "Please enter the name of the department(Press <enter> to select)",
+            }
+      
+          ]).then(data => {
+        console.log(data.inputDepartment);
+      let inputData = data.inputDepartment  
+      });
+
+          addDepartmentData.addDepartment(inputData).then(data => {
+            console.log(data,"test1");
+            console.table(data);
+
+          });
+
+      } else if (displayDB === "Add roles") {
+
+        console.log("Add roles");
+
+
+      } else if (displayDB === "Add employees") {
+
+        console.log("Add employees");
+
+
+      } else {
+
+        console.log("Update employee roles");
+      }
+
+
+    }
+    options(displayDB);
+  })
 
 };
 
@@ -116,12 +149,7 @@ questions();
 To Add model this 
 let addedRow = 3;
 
-db.query(`INSERT INTO Employees (department_name) VALUES (?)`, addedRow, (err, result) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log(result);
-});
+
 
 
 
@@ -195,20 +223,22 @@ WHEN I start the application
 THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
 WHEN I choose to view all departments
 THEN I am presented with a formatted table showing department names and department ids
-
-HERE
-
-
 WHEN I choose to view all roles
 THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
 WHEN I choose to view all employees
 THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
+
+HERE
+
 WHEN I choose to add a department
 THEN I am prompted to enter the name of the department and that department is added to the database
+
 WHEN I choose to add a role
 THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+
 WHEN I choose to add an employee
 THEN I am prompted to enter the employee’s first name, last name, role, and manager and that employee is added to the database
+
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
