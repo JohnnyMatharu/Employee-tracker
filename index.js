@@ -47,6 +47,7 @@ const questions = () => {
             );
           }; 
           addDepartment(inputData) {
+            console.log(inputData,"are we getting data?");
             return this.connection.query(
               //  "USE Employees",
             `INSERT INTO Employees (department_name) VALUES(?)`, inputData
@@ -114,13 +115,15 @@ const questions = () => {
           ]).then(data => {
         console.log(data.inputDepartment);
       let inputData = data.inputDepartment  
+      addDepartmentData.addDepartment(inputData).then(data => {
+        console.log(data,"test1");
+        console.table(data);
+
       });
+    
+    });
 
-          addDepartmentData.addDepartment(inputData).then(data => {
-            console.log(data,"test1");
-            console.table(data);
-
-          });
+          
 
       } else if (displayDB === "Add roles") {
 
