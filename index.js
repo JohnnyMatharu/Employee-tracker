@@ -67,12 +67,14 @@ const questions = () => {
                 'INSERT INTO Employee (first_name, last_name, job_title, manager) VALUES(?,?,?,?);', [inputDataOne, inputDataTwo, inputDataThree, inputDataFour] 
                 );
                 };
-
-
-
-
-
-        
+                updateEmployeeRole(inputDataOne,inputDataTwo) {
+                  console.log(inputDataTwo, inputDataOne);
+                  return this.connection.query(
+                    
+                 'UPDATE Employee SET job_title = (?) WHERE employee_id = (?);', [inputDataTwo, inputDataOne]
+                 
+                 );
+                    };
         };
       
         let database = new DB(connection)
@@ -167,28 +169,28 @@ const questions = () => {
 inquirer.prompt(
   [{
       type: "input",
-      name: "inputRolesOne",
+      name: "inputEmployeeOne",
       message: "Please enter employee's first name",
     },
     {
       type: "input",
-      name: "inputRolesTwo",
+      name: "inputEmployeeTwo",
       message: "Please enter employee's last name",
     },{
       type: "input",
-      name: "inputRolesThree",
+      name: "inputEmployeeThree",
       message: "Please enter the role title of the employee",
     },{
       type: "input",
-      name: "inputRolesFour",
+      name: "inputEmployeeFour",
       message: "Please enter the manager's name that the employee is reporting to",
     }
 
   ]).then(data => {
-let inputDataOne = data.inputRolesOne;
-let inputDataTwo = data.inputRolesTwo;
-let inputDataThree = data.inputRolesThree;
-let inputDataFour = data.inputRolesFour;
+let inputDataOne = data.inputEmployeeOne;
+let inputDataTwo = data.inputEmployeeTwo;
+let inputDataThree = data.inputEmployeeThree;
+let inputDataFour = data.inputEmployeeFour;
 database.addEmployees(inputDataOne,inputDataTwo,inputDataThree,inputDataFour).then(data => {
 database.findAllEmployees().then(data => {
   console.table(data);
@@ -199,11 +201,33 @@ database.findAllEmployees().then(data => {
 });
 
 
-
       } else {
+        inquirer.prompt(
+          [{
+            type: "list",
+            name: "roleUpdateChoice",
+            message: "Please choose the employee by their Employee ID number who's role you wish to update(Press <enter> to select)",
+            choices: ["1", "2", "3", "4", "5", "6"]
 
-        console.log("Update employee roles");
-       // const sql = `UPDATE voters SET email = ? WHERE id = ?`;
+            },{
+              type: "input",
+              name: "roleUpdateInput",
+              message: "Please enter the new role for the employee you wish to update",
+            }
+        
+          ]).then(data => {
+        let inputDataOne = data.roleUpdateChoice;
+        let inputDataTwo = data.roleUpdateInput;
+        database.updateEmployeeRole(inputDataOne,inputDataTwo).then(data => {
+        database.findAllEmployees().then(data => {
+          console.table(data);
+          questions();
+        });
+        });
+        
+        });
+      
+      
       }
 
 
@@ -214,71 +238,10 @@ database.findAllEmployees().then(data => {
 };
 
 questions();
-/*
-To Add model this 
-let addedRow = 3;
-
-
-
-
-
-let updatedDepartment = userInput;
-let updatedRow = 4;
-
-db.query(`UPDATE Employees SET Department = ? WHERE id = ?`, updatedDepartmentID, updatedRow, (err, result) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log(result);
-});
-
-
-
-*/
 
 /*
-CH:12.2.1, revise start from here, then inclass video and then inclass activities
-
-View roles
-id  Roles          salary    dapartment_id
-1   Accountant     75000     1
-2   Lawyer         300000    2
-3   Marketing team 150000    3
-4   Software Dev   125000    4
-5   Designer       60000     3
-6   Sales          60000     3
-
-View Employees 
-id Employee   Manager     Role         Dept
-1  Victor     null        Accountant    Finance
-2  Amber      Ramon       Accountant    Finance 
-3  Lito       Ram         Software Dev  Engineering 
-4  Bogata     Ram         Designer      Art
-5  Erik       Ram         Sales         test
-6  Carl       Ram         Software Dev  Engineering
-
-
-
-*/
-
-
-
-
-/*
-Andrew AskBCS, you will need .env file to save pasword for anyone who opens your sql, and connections.js will have connection to database
-
-ERIK (TA):
-sql
-node.js
-Node.js: inquirer
-add packages
     "inquirer": "^7.3.2",
     "mysql": "^2.18.1",
-no server.js needed, only adding database
-only 
-index.js (main inquirer)
-and sqlconnections.js which has connections to database (imported file)
-.sql file will be used to save the queries, but they only work when they are in mySQL workbench
 */
 
 
@@ -300,90 +263,24 @@ WHEN I choose to add a department
 THEN I am prompted to enter the name of the department and that department is added to the database
 WHEN I choose to add a role
 THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
-
-
-HERE
-
 WHEN I choose to add an employee
 THEN I am prompted to enter the employee’s first name, last name, role, and manager and that employee is added to the database
+
+HERE
 
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
-Hilary:
-console.table package, will display tables, 
-view dept,roles
-add all those
-update those
-seeds.sql needed to create data (to see if we can populate data)
-ask questions and update table using sql (asking user what to do, indirectly asking, bring emplyee, bring emply again to represent manager, use alias, their id will used to enter other employees)
-no need to clear table like in the module
 
-There is a demo available to consult including the screen shorts from class
-
-plan:
-Inquirer tues
-my sql wed
-connections thurs
-FRi, Sat and Sun remaining and submission
 
 Installed: mysql2, inquirer, console.table, npm i, npm start
 
-You will be committing a file that contains your database credentials. Make sure your MySQL password is not used for any other personal accounts, because it will be visible on GitHub.
 
-You might also want to make your queries asynchronous. MySQL2 exposes a .promise() function on Connections to “upgrade” an existing non-Promise connection to use Promises. Look into MySQL2's documentation (Links to an external site.) to make your queries asynchronous.
 https://www.npmjs.com/package/mysql2
 check design database map
 
-As the image illustrates, your schema should contain the following three tables:
 
-Department
 
-id: INT PRIMARY KEY
-
-name: VARCHAR(30) to hold department name
-
-Role
-
-id: INT PRIMARY KEY
-
-title: VARCHAR(30) to hold role title
-
-salary: DECIMAL to hold role salary
-
-department_id: INT to hold reference to department role belongs to
-
-Employee
-
-id: INT PRIMARY KEY
-
-first_name: VARCHAR(30) to hold employee first name
-
-last_name: VARCHAR(30) to hold employee last name
-
-role_id: INT to hold reference to employee role
-
-manager_id: INT to hold reference to another employee that is manager of the current employee. This field might be null if the employee has no manager.
-
-You might want to use a separate file containing functions for performing specific SQL queries you'll need to use. A constructor function or class could be helpful for organizing these. You might also want to include a seeds.sql file to pre-populate your database. This will make the development of individual features much easier.
-
-Bonus
-See if you can add some additional functionality to your application, such as the ability to do the following:
-
-Update employee managers.
-
-View employees by manager.
-
-View employees by department.
-
-Delete departments, roles, and employees.
-
-View the total utilized budget of a department—in other words, the combined salaries of all employees in that department.
-
-Repository contains a high-quality README with description and a link to a walkthrough video.
-
-How to Submit the Challenge
-You are required to submit BOTH of the following for review:
 
 A walkthrough video demonstrating the functionality of the application.
 
