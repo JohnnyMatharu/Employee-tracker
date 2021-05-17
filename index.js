@@ -50,15 +50,17 @@ const questions = () => {
             console.log(inputData,"are we getting data?");
             return this.connection.query(
               //  "USE Employees",
-              `INSERT INTO Department (department_name) VALUES (${inputData});`
+              'INSERT INTO Department (department_name) VALUE(?);', inputData
               );
+              
           };
-         // addroles() {
-           // return this.connection.query(
-              //  "USE Employees",
-             // `UPDATE Employees SET Department = ? WHERE id = ?`
-            //);
-            //};
+         addRoles(inputDataOne,inputDataTwo,inputDataThree) {
+          console.log(inputDataOne,inputDataTwo,inputDataThree); 
+          return this.connection.query(
+            //  name, salary, and department for the role
+            'INSERT INTO Roles (job_title, department_name, salary) VALUES(?,?,?);', inputDataOne, inputDataTwo, inputDataThree  
+            );
+            };
 
 
 
@@ -68,15 +70,13 @@ const questions = () => {
 
         
         };
-        let departmentData = new DB(connection)
-        let rolesData = new DB(connection)
-        let employeeData = new DB(connection)
-        let addDepartmentData = new DB(connection)
+      
+        let database = new DB(connection)
 
         if (displayDB === "View departments")
 {
 
-        departmentData.findAllDepartments().then(data => {
+        database.findAllDepartm).then(data => {
           console.log(data,"test1");
           console.table(data);
           // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
@@ -85,7 +85,7 @@ const questions = () => {
         });
 
       } else if (displayDB === "View roles") {
-        rolesData.findAllRoles().then(data => {
+        database.findAllRoles().then(data => {
           console.log(data);
           console.table(data);
         });
@@ -93,7 +93,7 @@ const questions = () => {
 
       } else if (displayDB === "View employees") {
  
-        employeeData.findAllEmployees().then(data => {
+        database.findAllEmployees().then(data => {
           console.log(data);
           console.table(data);
         });
@@ -115,10 +115,12 @@ const questions = () => {
           ]).then(data => {
         console.log(data.inputDepartment);
       let inputData = data.inputDepartment  
-      addDepartmentData.addDepartment(inputData).then(data => {
-        console.log(data,"test1");
-        console.table(data);
-
+      database.addDepartment(inputData).then(data => {
+        database.findAllDepartments().then(data => {
+          console.log(data,"test1");
+          console.table(data);
+          questions();
+        });
       });
     
     });
@@ -126,9 +128,37 @@ const questions = () => {
           
 
       } else if (displayDB === "Add roles") {
-
-        console.log("Add roles");
-
+       
+        inquirer.prompt(
+          [{
+              type: "input",
+              name: "inputRolesOne",
+              message: "Please enter the name of the role title(Press <enter> to select)",
+            },
+            {
+              type: "input",
+              name: "inputRolesTwo",
+              message: "Please enter the name of the department name(Press <enter> to select)",
+            },{
+              type: "input",
+              name: "inputRolesThree",
+              message: "Please enter the amount of the annual salary(Press <enter> to select)",
+            }
+      
+          ]).then(data => {
+      let inputDataOne = data.inputRolesOne;
+      let inputDataTwo = data.inputRolesTwo;
+      let inputDataThree = data.inputRolesThree;
+      database.addRoles(inputDataOne,inputDataTwo,inputDataThree).then(data => {
+        database.findAllRoles().then(data => {
+          console.log(data,"test2");
+          console.table(data);
+          questions();
+        });
+      });
+    
+    });
+    
 
       } else if (displayDB === "Add employees") {
 
@@ -230,11 +260,11 @@ WHEN I choose to view all roles
 THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
 WHEN I choose to view all employees
 THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
+WHEN I choose to add a department
+THEN I am prompted to enter the name of the department and that department is added to the database
 
 HERE
 
-WHEN I choose to add a department
-THEN I am prompted to enter the name of the department and that department is added to the database
 
 WHEN I choose to add a role
 THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
