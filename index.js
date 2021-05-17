@@ -50,15 +50,15 @@ const questions = () => {
             console.log(inputData,"are we getting data?");
             return this.connection.query(
               //  "USE Employees",
-            `INSERT INTO Employees (department_name) VALUES(?)`, inputData
-            );
+              `INSERT INTO Department (department_name) VALUES (${inputData});`
+              );
           };
-          addroles() {
-            return this.connection.query(
+         // addroles() {
+           // return this.connection.query(
               //  "USE Employees",
-              `UPDATE Employees SET Department = ? WHERE id = ?`
-            );
-            };
+             // `UPDATE Employees SET Department = ? WHERE id = ?`
+            //);
+            //};
 
 
 
