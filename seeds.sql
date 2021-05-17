@@ -21,8 +21,8 @@ CREATE TABLE Employee(
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   job_title VARCHAR(30) NOT NULL,
-  department_name VARCHAR(30) NOT NULL,
-  salary INTEGER(30) NOT NULL,
+  department_name VARCHAR(30) NOT NULL DEFAULT 'EMPTY',
+  salary INTEGER(30) NOT NULL DEFAULT 0,
   manager VARCHAR(30) NOT NULL
 );
 

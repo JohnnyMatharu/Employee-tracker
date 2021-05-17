@@ -61,8 +61,15 @@ const questions = () => {
             'INSERT INTO Roles (job_title, department_name, salary) VALUES(?,?,?);', [inputDataOne, inputDataTwo, inputDataThree] 
             );
             };
+            addEmployees(inputDataOne,inputDataTwo,inputDataThree,inputDataFour) {
 
-
+              //change this point on 
+              console.log(inputDataOne,inputDataTwo,inputDataThree,inputDataFour,"addEmployees function check"); 
+              return this.connection.query(
+                
+                'INSERT INTO Employee (first_name, last_name, job_title, manager) VALUES(?,?,?,?);', [inputDataOne, inputDataTwo, inputDataThree, inputDataFour] 
+                );
+                };
 
 
 
@@ -79,6 +86,7 @@ const questions = () => {
         database.findAllDepartments().then(data => {
           console.log(data,"test1");
           console.table(data);
+          questions();
           // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
           // documentation for more information 
           //results in the console.table 
@@ -88,6 +96,7 @@ const questions = () => {
         database.findAllRoles().then(data => {
           console.log(data);
           console.table(data);
+          questions();
         });
         console.log("View roles");
 
@@ -96,6 +105,7 @@ const questions = () => {
         database.findAllEmployees().then(data => {
           console.log(data);
           console.table(data);
+          questions();
         });
         console.log("View employees");
 
@@ -109,7 +119,7 @@ const questions = () => {
           [{
               type: "input",
               name: "inputDepartment",
-              message: "Please enter the name of the department(Press <enter> to select)",
+              message: "Please enter the name of the department",
             }
       
           ]).then(data => {
@@ -133,16 +143,16 @@ const questions = () => {
           [{
               type: "input",
               name: "inputRolesOne",
-              message: "Please enter the name of the role title(Press <enter> to select)",
+              message: "Please enter the name of the role title",
             },
             {
               type: "input",
               name: "inputRolesTwo",
-              message: "Please enter the name of the department name(Press <enter> to select)",
+              message: "Please enter the name of the department name",
             },{
               type: "input",
               name: "inputRolesThree",
-              message: "Please enter the amount of the annual salary(Press <enter> to select)",
+              message: "Please enter the amount of the annual salary",
             }
       
           ]).then(data => {
@@ -164,12 +174,51 @@ const questions = () => {
 
       } else if (displayDB === "Add employees") {
 
-        console.log("Add employees");
+        //WHEN I choose to add an employee
+//THEN I am prompted to enter the employee’s first name, last name, role, and manager and that employee is added to the database
+inquirer.prompt(
+  [{
+      type: "input",
+      name: "inputRolesOne",
+      message: "Please enter employee's first name",
+    },
+    {
+      type: "input",
+      name: "inputRolesTwo",
+      message: "Please enter employee's last name",
+    },{
+      type: "input",
+      name: "inputRolesThree",
+      message: "Please enter the role title of the employee",
+    },{
+      type: "input",
+      name: "inputRolesFour",
+      message: "Please enter the manager's name that the employee is reporting to",
+    }
+
+  ]).then(data => {
+let inputDataOne = data.inputRolesOne;
+let inputDataTwo = data.inputRolesTwo;
+let inputDataThree = data.inputRolesThree;
+let inputDataFour = data.inputRolesFour;
+console.log(inputDataOne, inputDataTwo, inputDataThree, inputDataFour, "this is test one");
+console.log(database.addEmployees(inputDataOne,inputDataTwo,inputDataThree,inputDataFour), "just checking");
+database.addEmployees(inputDataOne,inputDataTwo,inputDataThree,inputDataFour).then(data => {
+database.findAllEmployees().then(data => {
+  console.log(data,"test3");
+  console.table(data);
+  questions();
+});
+});
+
+});
+
 
 
       } else {
 
         console.log("Update employee roles");
+       // const sql = `UPDATE voters SET email = ? WHERE id = ?`;
       }
 
 
