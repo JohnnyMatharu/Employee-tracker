@@ -76,7 +76,7 @@ const questions = () => {
         if (displayDB === "View departments")
 {
 
-        database.findAllDepartm).then(data => {
+        database.findAllDepartments.then(data => {
           console.log(data,"test1");
           console.table(data);
           // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
