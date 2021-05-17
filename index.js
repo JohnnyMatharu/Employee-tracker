@@ -47,7 +47,6 @@ const questions = () => {
             );
           }; 
           addDepartment(inputData) {
-            console.log(inputData,"are we getting data?");
             return this.connection.query(
               //  "USE Employees",
               'INSERT INTO Department (department_name) VALUE(?);', inputData
@@ -55,7 +54,6 @@ const questions = () => {
               
           };
          addRoles(inputDataOne,inputDataTwo,inputDataThree) {
-          console.log(inputDataOne,inputDataTwo,inputDataThree,"addRoles function check"); 
           return this.connection.query(
             //  name, salary, and department for the role
             'INSERT INTO Roles (job_title, department_name, salary) VALUES(?,?,?);', [inputDataOne, inputDataTwo, inputDataThree] 
@@ -63,8 +61,7 @@ const questions = () => {
             };
             addEmployees(inputDataOne,inputDataTwo,inputDataThree,inputDataFour) {
 
-              //change this point on 
-              console.log(inputDataOne,inputDataTwo,inputDataThree,inputDataFour,"addEmployees function check"); 
+              //change this point on
               return this.connection.query(
                 
                 'INSERT INTO Employee (first_name, last_name, job_title, manager) VALUES(?,?,?,?);', [inputDataOne, inputDataTwo, inputDataThree, inputDataFour] 
@@ -84,7 +81,6 @@ const questions = () => {
 {
 
         database.findAllDepartments().then(data => {
-          console.log(data,"test1");
           console.table(data);
           questions();
           // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
@@ -94,7 +90,6 @@ const questions = () => {
 
       } else if (displayDB === "View roles") {
         database.findAllRoles().then(data => {
-          console.log(data);
           console.table(data);
           questions();
         });
@@ -103,11 +98,9 @@ const questions = () => {
       } else if (displayDB === "View employees") {
  
         database.findAllEmployees().then(data => {
-          console.log(data);
           console.table(data);
           questions();
         });
-        console.log("View employees");
 
       } else if (displayDB === "Add departments") {
 
@@ -123,11 +116,9 @@ const questions = () => {
             }
       
           ]).then(data => {
-        console.log(data.inputDepartment);
       let inputData = data.inputDepartment  
       database.addDepartment(inputData).then(data => {
         database.findAllDepartments().then(data => {
-          console.log(data,"test1");
           console.table(data);
           questions();
         });
@@ -159,11 +150,8 @@ const questions = () => {
       let inputDataOne = data.inputRolesOne;
       let inputDataTwo = data.inputRolesTwo;
       let inputDataThree = data.inputRolesThree;
-      console.log(inputDataOne, inputDataTwo, inputDataThree, "this is test one");
-      console.log(database.addRoles(inputDataOne,inputDataTwo,inputDataThree), "just checking");
       database.addRoles(inputDataOne,inputDataTwo,inputDataThree).then(data => {
         database.findAllRoles().then(data => {
-          console.log(data,"test2");
           console.table(data);
           questions();
         });
@@ -201,11 +189,8 @@ let inputDataOne = data.inputRolesOne;
 let inputDataTwo = data.inputRolesTwo;
 let inputDataThree = data.inputRolesThree;
 let inputDataFour = data.inputRolesFour;
-console.log(inputDataOne, inputDataTwo, inputDataThree, inputDataFour, "this is test one");
-console.log(database.addEmployees(inputDataOne,inputDataTwo,inputDataThree,inputDataFour), "just checking");
 database.addEmployees(inputDataOne,inputDataTwo,inputDataThree,inputDataFour).then(data => {
 database.findAllEmployees().then(data => {
-  console.log(data,"test3");
   console.table(data);
   questions();
 });
