@@ -55,10 +55,10 @@ const questions = () => {
               
           };
          addRoles(inputDataOne,inputDataTwo,inputDataThree) {
-          console.log(inputDataOne,inputDataTwo,inputDataThree); 
+          console.log(inputDataOne,inputDataTwo,inputDataThree,"addRoles function check"); 
           return this.connection.query(
             //  name, salary, and department for the role
-            'INSERT INTO Roles (job_title, department_name, salary) VALUES(?,?,?);', inputDataOne, inputDataTwo, inputDataThree  
+            'INSERT INTO Roles (job_title) VALUE(?);', inputDataOne 
             );
             };
 
@@ -76,7 +76,7 @@ const questions = () => {
         if (displayDB === "View departments")
 {
 
-        database.findAllDepartments.then(data => {
+        database.findAllDepartments().then(data => {
           console.log(data,"test1");
           console.table(data);
           // Here you will import object shaped databased from connection.js and then pass it to console.table, check their 
@@ -149,6 +149,8 @@ const questions = () => {
       let inputDataOne = data.inputRolesOne;
       let inputDataTwo = data.inputRolesTwo;
       let inputDataThree = data.inputRolesThree;
+      console.log(inputDataOne, inputDataTwo, inputDataThree, "this is test one");
+      console.log(database.addRoles(inputDataOne,inputDataTwo,inputDataThree), "just checking");
       database.addRoles(inputDataOne,inputDataTwo,inputDataThree).then(data => {
         database.findAllRoles().then(data => {
           console.log(data,"test2");
