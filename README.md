@@ -13,7 +13,7 @@ https://drive.google.com/file/d/1yN2zpHR4aOyAL9EbXUyWH1p-ofwtXxYW/view
 https://github.com/JohnnyMatharu/Employee-tracker/tree/main
 
 # Screenshot
-
+https://github.com/JohnnyMatharu/Employee-tracker/blob/main/Screen%20Shot%202021-06-08%20at%201.54.34%20PM.png?raw=true
 
 # Made by
 Johnny Matharu (Indermeet)
